@@ -12,7 +12,7 @@ import data from './data/dump';
 
 const App = () => {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
-  const [tik, setTik] = useState(false);
+  const [tik, setTik] = useState(true);
   return (
     <div
       className={css`
