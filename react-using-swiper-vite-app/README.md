@@ -1,0 +1,3 @@
+- Reference
+  - [swiperjs](https://swiperjs.com/react)
+  - [swiperjs event](https://swiperjs.com/swiper-api#events)
