@@ -1,0 +1,3 @@
+- Reference
+  - [slick](https://github.com/kenwheeler/slick/)
+  - [react-slick](https://github.com/akiran/react-slick)
