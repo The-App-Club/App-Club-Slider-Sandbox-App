@@ -12,7 +12,6 @@ const slides = [...Array(data.length).keys()];
 const App = () => {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   const [tik, setTik] = useState(true);
-  const [isFirstRender, setIsFirstRender] = useState(false);
 
   return (
     <div
