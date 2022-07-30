@@ -1,0 +1,56 @@
+import {createRoot} from 'react-dom/client';
+import {css, cx} from '@emotion/css';
+import {useEffect, useCallback, useMemo, useRef, useState} from 'react';
+import '@fontsource/inter';
+import './styles/index.scss';
+import data from './data/dump';
+import {Description} from './components/Description';
+import {EmblaCarousel} from './components/EmblaCarousel';
+
+const slides = [...Array(data.length).keys()];
+
+const App = () => {
+  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+  const [tik, setTik] = useState(true);
+  const [isFirstRender, setIsFirstRender] = useState(false);
+
+  return (
+    <div
+      className={css`
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 1rem;
+      `}
+    >
+      <h2
+        className={css`
+          padding-top: 1rem;
+        `}
+      >
+        Bebop Slider Example
+      </h2>
+      <div
+        className={css`
+          max-width: 30rem;
+          margin: auto;
+          width: 100%;
+        `}
+      >
+        <EmblaCarousel
+          slides={slides}
+          setTik={setTik}
+          setActiveSlideIndex={setActiveSlideIndex}
+        />
+        <Description tik={tik} text={data[activeSlideIndex].description} />
+      </div>
+    </div>
+  );
+};
+
+const container = document.getElementById('root');
+
+const root = createRoot(container);
+
+root.render(<App />);

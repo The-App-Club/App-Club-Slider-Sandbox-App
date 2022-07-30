@@ -1,0 +1,2 @@
+- Reference
+  - [embla-carousel events](https://www.embla-carousel.com/api/events/)
