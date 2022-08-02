@@ -1,3 +1,0 @@
-- Reference
-  - [hamburgers](https://github.com/jonsuh/hamburgers)
-  - [rc-drawer](https://github.com/react-component/drawer)
