@@ -55,10 +55,7 @@ const MainSlider = ({
           }}
           className={css`
             width: 100%;
-            min-height: 18rem;
-            @media (max-width: 768px) {
-              min-height: 14rem;
-            }
+            height: 200px;
             div {
               position: absolute;
               width: 100%;
@@ -75,7 +72,7 @@ const MainSlider = ({
             rewind: true,
             perPage: 1,
             direction: 'ttb',
-            height: '18rem',
+            height: `200px`,
             pagination: false,
             drag: false,
             arrows: false,
