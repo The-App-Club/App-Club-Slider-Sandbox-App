@@ -1,0 +1,3 @@
+- Reference
+  - [embla-carousel](https://www.embla-carousel.com/)
+  - [use-animation-controls](https://www.framer.com/docs/use-animation-controls/)
