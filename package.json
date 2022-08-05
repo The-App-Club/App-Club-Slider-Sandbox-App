@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "build": "cd $BUILD_DIR && vite build"
+  },
+  "devDependencies": {
+    "vite": "^2.9.9"
+  }
+}
