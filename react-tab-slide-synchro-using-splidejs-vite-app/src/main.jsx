@@ -8,13 +8,17 @@ import {
   useRef,
   useState,
 } from 'react';
-import {Button} from '@mui/material';
-import {Splide, SplideSlide} from '@splidejs/react-splide';
-import '@splidejs/react-splide/css';
+
 import {HomePage} from './pages/home';
 import {AboutPage} from './pages/about';
 import {WorkPage} from './pages/work';
 import {ContactPage} from './pages/contact';
+
+import {Tab} from './components/Tab';
+import {Slider} from './components/Slider';
+
+import {Splide, SplideSlide} from '@splidejs/react-splide';
+import '@splidejs/react-splide/css';
 
 import '@fontsource/inter';
 import './styles/index.scss';
@@ -68,90 +72,22 @@ const App = () => {
         padding: 1rem;
       `}
     >
-      <ul
-        className={css`
-          list-style: none;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          li {
-            /* border: 1px solid darkgray; */
-            padding: 0.5rem;
-            cursor: pointer;
-            &.active {
-              background: #cad4f5;
-            }
-          }
-        `}
-      >
-        {data.map((item, index) => {
-          return (
-            <li
-              ref={tabsDomRef[index]}
-              key={index}
-              className={cx(
-                css``,
-                `${index === activeSlideIndex ? 'active' : ''}`
-              )}
-              onClick={(e) => {
-                const nextIndex = Math.min(data.length - 1, index + 1);
-                const activeIndex = index;
-                const prevIndex = Math.max(0, index - 1);
-                splideInstanceControllerRef.current.setIndex(activeIndex);
-                splideInstanceMoveRef.current.move(
-                  nextIndex,
-                  activeIndex,
-                  prevIndex
-                );
-              }}
-            >
-              {item.name}
-            </li>
-          );
-        })}
-      </ul>
-      <div
-        className={css`
-          max-width: 30rem;
-          margin: auto;
-          width: 100%;
-          border: 1px solid darkgray;
-        `}
-      >
-        <Splide
-          onMounted={(e) => {
-            splideInstanceControllerRef.current = e.Components.Controller;
-            splideInstanceMoveRef.current = e.Components.Move;
-          }}
-          onMove={(e) => {
-            setTik(false);
-          }}
-          onMoved={(e) => {
-            setTik(true);
-          }}
-          onVisible={(e) => {
-            // console.log(`visible`, e.index);
-            setActiveSlideIndex(e.index);
-            const tabDomList = tabsDomRef.map((tabDomRef) => {
-              return tabDomRef.current;
-            });
-            tabDomList.forEach((tabDom) => {
-              tabDom.classList.remove('active');
-            });
-            const dom = tabDomList[e.index];
-            dom.classList.add('active');
-          }}
-          className={css`
-            width: 100%;
-          `}
-          options={{rewind: true, perPage: 1, pagination: false}}
-          aria-label="Bebop Example"
-        >
-          {data.map((item, index) => {
-            return <SplideSlide key={index}>{item.page({tik})}</SplideSlide>;
-          })}
-        </Splide>
-      </div>
+      <Tab
+        activeSlideIndex={activeSlideIndex}
+        data={data}
+        splideInstanceMoveRef={splideInstanceMoveRef}
+        splideInstanceControllerRef={splideInstanceControllerRef}
+        tabsDomRef={tabsDomRef}
+      />
+      <Slider
+        data={data}
+        tik={tik}
+        setTik={setTik}
+        setActiveSlideIndex={setActiveSlideIndex}
+        splideInstanceControllerRef={splideInstanceControllerRef}
+        splideInstanceMoveRef={splideInstanceMoveRef}
+        tabsDomRef={tabsDomRef}
+      />
     </div>
   );
 };

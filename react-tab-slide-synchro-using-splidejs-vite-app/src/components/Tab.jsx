@@ -1,20 +1,12 @@
 import {css, cx} from '@emotion/css';
-import {
-  createRef,
-  useEffect,
-  useCallback,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
 
-const Tab = ({activeSlideIndex, data, splideInstanceMoveRef}) => {
-  const tabsDomRef = useMemo(() => {
-    return data.map((item, index) => {
-      return createRef();
-    });
-  }, []);
-
+const Tab = ({
+  tabsDomRef,
+  activeSlideIndex,
+  data,
+  splideInstanceMoveRef,
+  splideInstanceControllerRef,
+}) => {
   return (
     <ul
       className={css`
@@ -23,11 +15,10 @@ const Tab = ({activeSlideIndex, data, splideInstanceMoveRef}) => {
         justify-content: center;
         align-items: center;
         li {
-          /* border: 1px solid darkgray; */
           padding: 0.5rem;
           cursor: pointer;
           &.active {
-            background: #f7f7f7;
+            background: #f6f6f6;
           }
         }
       `}
@@ -42,18 +33,14 @@ const Tab = ({activeSlideIndex, data, splideInstanceMoveRef}) => {
               `${index === activeSlideIndex ? 'active' : ''}`
             )}
             onClick={(e) => {
-              const tabDomList = tabsDomRef.map((tabDomRef) => {
-                return tabDomRef.current;
-              });
-              tabDomList.forEach((tabDom) => {
-                tabDom.classList.remove('active');
-              });
-              const dom = e.currentTarget;
-              dom.classList.add('active');
+              const nextIndex = Math.min(data.length - 1, index + 1);
+              const activeIndex = index;
+              const prevIndex = Math.max(0, index - 1);
+              splideInstanceControllerRef.current.setIndex(activeIndex);
               splideInstanceMoveRef.current.move(
-                Math.min(data.length - 1, index + 1),
-                index,
-                Math.max(0, index - 1)
+                nextIndex,
+                activeIndex,
+                prevIndex
               );
             }}
           >
